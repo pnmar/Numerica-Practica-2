@@ -12,13 +12,15 @@ ofstream fileOut;
 
 int main(int argc, char *arcv[]){
     
-    //////////////////////////////////////
-    // Lectura de datos de los ficheros //
-    //////////////////////////////////////
+    /*
+       Lectura de datos de los ficheros
+                                        */
     
     fileIn.open("MAT00.DAT");
     
-    fileIn >> n >> m;
+    int dim;
+    
+    fileIn >> dim >> m;
     v< v<tipo> > A(n,0);
     v<tipo> B(n,0);
     
@@ -35,6 +37,30 @@ int main(int argc, char *arcv[]){
     
     fileIn.close();
     
+    /*
+       Escritura de datos en el fichero
+                                        */
     
+    fileOut.open("");
+    
+    fileOut << "Data input file: " << ,,, << endl;
+    fileOut << "Dimension n=" << dim << endl << endl;
+    
+    fileOut << "Determinant of A: " << det << endl << endl;
+    
+    fileOut << "Permutation vector:" << endl;
+    fileOut << blablabla << endl << endl;
+    
+    fileOut << "Checking the norm of the residue: |PA-LU|" << endl;
+    fileOut << "  1-norm: " << ... << endl;
+    fileOut << "  supremum norm: " << ... << endl << endl;
+    
+    fileOut << "Solving Ax=b:" << endl;
+    fileOut << "  1-norm of the residua vector Ax+b: " << normres << endl;
+    fileOut << "  supremum norm of the residue vector Ax-b: " << ... << endl << endl;
+    
+    fileOut << "We compute the inverse of A:" << endl;
+    fileOut << "  1-norm of A*inv(A) - I: " << ... << endl;
+    fileOut << "  supremum norm of A*inv(A) - I: " << ... << endl;
     
 }
