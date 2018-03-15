@@ -16,7 +16,16 @@ int main(int argc, char *arcv[]){
        Lectura de datos de los ficheros
                                         */
     
-    fileIn.open("MAT00.DAT");
+    if (argc >= 2) fileIn.open(arcv[1]);
+    else {
+        cerr << "ERROR: No se ha introducido ningún fichero de entrada." << endl;
+        return 0;
+    }
+    
+    if (not fileIn.is_open) {
+        cerr << "ERROR: No se ha podido abrir el archivo " << arcv[1] << " para leer los datos." << endl;
+        return 0;
+    }
     
     int dim;
     
@@ -41,7 +50,16 @@ int main(int argc, char *arcv[]){
        Escritura de datos en el fichero
                                         */
     
-    fileOut.open("");
+    if (argc >= 3) fileOut.open(arcg[2]);
+    else {
+        cerr << "ERROR: No se ha introducido ningún fichero de salida." << endl;
+        return 0;
+    }
+    
+    if (not dileOut.is_open()) {
+        cerr << "ERROR: No se ha podido abrir el fichero " << arcv[2] << " para escribir los datos" << endl;
+        return 0;
+    }
     
     fileOut << "Data input file: " << ,,, << endl;
     fileOut << "Dimension n=" << dim << endl << endl;
@@ -56,11 +74,12 @@ int main(int argc, char *arcv[]){
     fileOut << "  supremum norm: " << ... << endl << endl;
     
     fileOut << "Solving Ax=b:" << endl;
-    fileOut << "  1-norm of the residua vector Ax+b: " << normres << endl;
+    fileOut << "  1-norm of the residue vector Ax+b: " << normres << endl;
     fileOut << "  supremum norm of the residue vector Ax-b: " << ... << endl << endl;
     
     fileOut << "We compute the inverse of A:" << endl;
     fileOut << "  1-norm of A*inv(A) - I: " << ... << endl;
     fileOut << "  supremum norm of A*inv(A) - I: " << ... << endl;
     
+    fileOut.close();
 }
