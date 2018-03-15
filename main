@@ -18,12 +18,12 @@ int main(int argc, char *arcv[]){
     
     if (argc >= 2) fileIn.open(arcv[1]);
     else {
-        cerr << "ERROR: No se ha introducido ningún fichero de entrada." << endl;
+        cerr << "ERROR: There is no input file." << endl;
         return 0;
     }
     
     if (not fileIn.is_open) {
-        cerr << "ERROR: No se ha podido abrir el archivo " << arcv[1] << " para leer los datos." << endl;
+        cerr << "ERROR: The file " << arcv[1] << " cannot be open." << endl;
         return 0;
     }
     
@@ -52,12 +52,12 @@ int main(int argc, char *arcv[]){
     
     if (argc >= 3) fileOut.open(arcg[2]);
     else {
-        cerr << "ERROR: No se ha introducido ningún fichero de salida." << endl;
+        cerr << "ERROR: There is no output file." << endl;
         return 0;
     }
     
     if (not dileOut.is_open()) {
-        cerr << "ERROR: No se ha podido abrir el fichero " << arcv[2] << " para escribir los datos" << endl;
+        cerr << "ERROR: The file " << arcv[2] << " cannot be open." << endl;
         return 0;
     }
     
