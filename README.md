@@ -1,3 +1,3 @@
 # Numerica-Practica-2
 
-Esto será el código de las prácticas de numérica
+Código para la práctica de numérica de descomposición LU
