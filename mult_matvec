@@ -1,0 +1,30 @@
+#include <iostream>
+#include <cmath>
+#include <fstream>
+#include "stdlib.h"
+using namespace std;
+
+/* PRE: A matrix nxm and a vector of dimension p are given.
+   POS: The vector obtanined bay multiplying the matrix and the vector is returned. */
+
+double *mult_matvec(double **A, double *x, int n, int m, int p) {
+    
+    // Comprobación de las dimensiones
+    if (m != p) {
+        cerr << "ERROR: Dimensions do not match." << endl;
+        return 0;
+    }
+    
+    // Declaración del vector
+    double *y;
+    y = (double *) calloc(n, sizeof(double));
+    
+    for (int i = 0; i < n; ++i) {
+        double sum = 0;
+        for (j = 0; j < m; ++j) sum += A[i][j]*x[j];
+        y[i] = sum;
+    }
+    
+    return *y;
+    
+}
