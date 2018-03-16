@@ -1,0 +1,35 @@
+#include <iostream>
+#include <cmath>
+#include <fstream>
+#include "stdlib.h"
+using namespace std;
+
+ifstream fileIn
+
+/* PRE: The program reads and creates a square matrix from data provided by the input file.
+   POS: The program returns the matrix.                                                      */
+
+double **read_matrix(char* file){
+    
+    fileIn.open(file);
+    
+    // Dimensión y número de elementos de la matriz
+    int n, m;
+    fileIn >> n >> m;
+    
+    // Creación de la matriz
+    double **a;
+    a = (double**) calloc(n,sizeof(a*));
+    for (int i = 0; i < n; ++i) a* = (double**) calloc(n,sizeof(double));
+    
+    // Lectura de datos de la matriz
+    for (int k = 0; k < m; ++k) {
+        int i, j;
+        double elem;
+        fileIn >> i >> j >> elem;
+        a[i][j] = elem;
+    }
+    
+    return **a;
+    
+}
