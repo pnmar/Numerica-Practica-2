@@ -1,0 +1,34 @@
+#include <iostream>
+#include "stdlib.h"
+using namespace std;
+
+/* PRE: El programa lee dos matrices de dimensiones nxm y pxq si
+        las dimensiones m y p coinciden.
+   POS: Se devuelve una matriz c de dimensiones nxq que es el producto
+        de las matrices de entrada.                                    */
+
+double **mult_matr(double **a, double **b, int n, int m, int p, int q) {
+    
+    // Comprobación de las dimensiones
+    if (m != q) {
+        cerr << "ERROR: Matrices cannot be multiplicated as dimensions do not match" << endl;
+        return 0;
+    }
+    
+    // Creación de la matriz producto
+    double **prod;
+    prod = (double**) calloc (n, sizeof(double*));
+    for (int i = 0; i < n; ++i) prod[i] = (double*) calloc (q, sizeof(double));
+    
+    // Llenado de la matriz producto por filas
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < q; ++j) {
+            double sum = 0;
+            for (int k = 0; k < m; ++k) sum += a[i][k]*b[k][j];
+            prod[i][j] = sum;
+        }
+    }
+    
+    return **prod;
+    
+}
