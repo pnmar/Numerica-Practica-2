@@ -9,7 +9,7 @@ using namespace std;
 double mat_1_norm(double **a, int n){
     double max = 0;
     
-    for (int j = 0; j < n; ++i){
+    for (int j = 0; j < n; ++j){
         double sum = 0;
         for (int i = 0; i < n; ++i) sum += abs(a[i][j]);
         if (max < sum) max = sum;
