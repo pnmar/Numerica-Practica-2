@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cmath>
-#include "stdlib."
+#include "stdlib.h"
 using namespace std;
 
 void resol(double **a, double x[], double b[], int n, int perm[]) {
