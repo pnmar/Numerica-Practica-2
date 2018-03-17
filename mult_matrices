@@ -10,7 +10,7 @@ using namespace std;
 double **mult_matr(double **a, double **b, int n, int m, int p, int q) {
     
     // Comprobación de las dimensiones
-    if (m != q) {
+    if (m != p) {
         cerr << "ERROR: Matrices cannot be multiplicated as dimensions do not match" << endl;
         return 0;
     }
