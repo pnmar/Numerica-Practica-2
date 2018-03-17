@@ -4,19 +4,16 @@
 #include <vector>
 using namespace std;
 
-typedef tipo double
-typedef vector v;
-
 ifstream fileIn;
 ofstream fileOut;
 
-int main(int argc, char *arcv[]){
+int main(){
     
     /*
        Lectura de datos de los ficheros
                                         */
     
-    if (argc >= 2) fileIn.open(arcv[1]);
+    /*if (argc >= 2) fileIn.open(arcv[1]);
     else {
         cerr << "ERROR: There is no input file." << endl;
         return 0;
@@ -25,7 +22,7 @@ int main(int argc, char *arcv[]){
     if (not fileIn.is_open) {
         cerr << "ERROR: The file " << arcv[1] << " cannot be open." << endl;
         return 0;
-    }
+    }*/
     
     int dim;
     
@@ -50,7 +47,7 @@ int main(int argc, char *arcv[]){
        Escritura de datos en el fichero
                                         */
     
-    if (argc >= 3) fileOut.open(arcg[2]);
+    /*if (argc >= 3) fileOut.open(arcg[2]);
     else {
         cerr << "ERROR: There is no output file." << endl;
         return 0;
@@ -59,7 +56,7 @@ int main(int argc, char *arcv[]){
     if (not dileOut.is_open()) {
         cerr << "ERROR: The file " << arcv[2] << " cannot be open." << endl;
         return 0;
-    }
+    }*/
     
     fileOut << "Data input file: " << ,,, << endl;
     fileOut << "Dimension n=" << dim << endl << endl;
