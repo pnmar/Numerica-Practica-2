@@ -1,0 +1,59 @@
+#include <iostream>
+#include "stdlib.h"
+#include <cmath>
+using namespace std;
+
+int lu(double **a, int n, int perm[], double tol) {
+
+    for (int k = 0; k < n - 1; ++j) {
+        // Comparación de pivotes
+        
+        double maxpiv = 0;
+        int filamaxpiv = k;
+        
+        // Cálculo del máximo pivote por filas
+        for (int i = k; i < n; ++i) {
+        
+            maxfil = 0;
+            
+            // Cálculo del máximo por filas
+            for (int j = k; j < n; ++k) if (maxfil < abs(a[i][j])) maxfil = abs(a[i][j]);
+            if (maxfil == 0) {
+                cerr << "ERROR: Fila nula." << endl;
+                return 0;
+            }
+            
+            double newpiv = abs(a[i][k])/maxfil;
+            if (maxpiv < newpiv) {
+                maxpiv = newpiv;
+                filamaxpiv = i;
+            }
+        }
+        
+        // Comparación pivote con tolerancia
+        if (maxpiv < tol) {
+            cerr << "ERROR: La matriz es singular o casi singular." << endl;
+            return 0;
+        }
+        
+        // Cambio de filas
+        for (int j = 0; j < n; ++j) {
+            double temp = a[k][j];
+            a[k][j] = a[filamaxpiv][j];
+            a[filamaxpiv][j] = temp;
+        }
+        
+        // Escritura en el vector permutación (Otro p*** swap)
+        double temp = perm[k];
+        perm[k] = perm[filamaxpiv];
+        perm[filamaxpiv] = temp;
+        
+        // Guardado de los multiplicadores
+        for (int i = k; i < n; ++i) a[i][k] = a[i][k]/a[k][k];
+        
+        // (Eliminación) Gauss(iana)
+        for (int i = k + 1; i < n; ++i) {
+            for (int j = k + 1; j < n; ++j) a[i][j] -= a[i][k]*a[k][j];
+        }   
+    }
+}
