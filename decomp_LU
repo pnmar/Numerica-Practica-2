@@ -4,8 +4,10 @@
 using namespace std;
 
 int lu(double **a, int n, int perm[], double tol) {
+	
+	int numper = 0;
 
-    for (int k = 0; k < n - 1; ++j) {
+    for (int k = 0; k < n - 1; ++k) {
         // Comparación de pivotes
         
         double maxpiv = 0;
@@ -14,7 +16,7 @@ int lu(double **a, int n, int perm[], double tol) {
         // Cálculo del máximo pivote por filas
         for (int i = k; i < n; ++i) {
         
-            maxfil = 0;
+            double maxfil = 0;
             
             // Cálculo del máximo por filas
             for (int j = k; j < n; ++k) if (maxfil < abs(a[i][j])) maxfil = abs(a[i][j]);
@@ -37,11 +39,15 @@ int lu(double **a, int n, int perm[], double tol) {
         }
         
         // Cambio de filas
-        for (int j = 0; j < n; ++j) {
-            double temp = a[k][j];
-            a[k][j] = a[filamaxpiv][j];
-            a[filamaxpiv][j] = temp;
-        }
+        if (filamaxpiv != k) {
+			for (int j = 0; j < n; ++j) {
+				double temp = a[k][j];
+				a[k][j] = a[filamaxpiv][j];
+				a[filamaxpiv][j] = temp;
+			}
+			++numper;
+		}
+        
         
         // Escritura en el vector permutación (Otro p*** swap)
         double temp = perm[k];
@@ -56,4 +62,7 @@ int lu(double **a, int n, int perm[], double tol) {
             for (int j = k + 1; j < n; ++j) a[i][j] -= a[i][k]*a[k][j];
         }   
     }
+    
+    if (numper%2 == 0) return 1;
+    else return -1;
 }
