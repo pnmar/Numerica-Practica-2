@@ -3,20 +3,25 @@
 #include "stdlib.h"
 using namespace std;
 
+/* PRE: Se da una matriz cuadrada a de dimensiones nxn descompuesta en 
+   la forma perm*a = L*U, el vector de permutaciones perm[], el vector 
+   de coeficientes b[] y el vector solución x[].
+   POS: Se resuelve el sistema a*x = b y se escribe la solución en x[] */
+
 void resol(double **a, double x[], double b[], int n, int perm[]) {
     
     // Declaración del vector P*b
     double *B;
     B = (double *) calloc(n, sizeof(double));
     
-    // Declaración del vector y solución de L*y = B
+    // Declaración del vector y[] solución de L*y = B
     double *y;
     y = (double *) calloc(n, sizeof(double));
     
     // LLenado de B (permutación de b)
     for(int i = 0; i < n; ++i) B[i] = b[perm[i]];
     
-    // Solución del sistema L*y = B
+    // Resolución del sistema L*y = B
     y[0] = B[0];
     for (int i = 1; i < n; ++i) {
         double sum = 0;
@@ -24,7 +29,7 @@ void resol(double **a, double x[], double b[], int n, int perm[]) {
         y[i] = B[i] - sum;
     }
     
-    // Solución del sistema U*x = y
+    // Resolución del sistema U*x = y
     x[n - 1] = y[n - 1]/a[n - 1][n - 1];
     for (int i = n - 2; i >= 0; --i) {
         double sum = 0;
