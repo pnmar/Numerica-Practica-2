@@ -1,0 +1,21 @@
+#include <iostream>
+#include <cmath>
+#include "stdlib.h"
+using namespace std;
+
+/* PRE: Se da una matriz ya descompuesta en la forma a = L*U de dimensión nxn y el número
+   y el número de permutaciones hechas para calcular la forma LU de la matriz.
+   POS: Se devuelve el determinante de la matriz a.                                       */
+
+double determinant(double **a, int n, int numper) {
+    
+    // Valor inicial del determinante
+    double prod = 1;
+    
+    // Cálculo aprovechando que a está descompuesta en la forma a = L*U
+    for (int k = 0; k < n; ++k) prod *= a[k][k];
+    
+    if (numper%2 == 0) return prod;
+    else return - prod;
+
+}
