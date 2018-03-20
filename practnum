@@ -1,0 +1,129 @@
+include <iostream>
+#include <cmath>
+#include <fstream>
+#include "stdlib.h"
+using namespace std;
+
+ifstream fileIn;
+
+int lu(double **a, int n, int *perm, double tol) {
+	
+	int numper = 0;
+    
+    
+	
+	// Iteración del método de Gauss
+    for (int k = 0; k < n - 1; ++k) {
+        double maxpiv = 0;
+        int filamaxpiv = k;
+        
+        // Comparación de pivotes
+        for (int i = k; i < n; ++i) {
+        
+            double maxfil = 0;
+            
+            // Cálculo del máximo por filas
+            for (int j = k; j < n; ++j) {
+                if (maxfil < abs(a[i][j])) maxfil = abs(a[i][j]);
+            }
+            
+
+            if (maxfil == 0) {
+                cerr << "ERROR: Fila nula." << endl;
+                return 0;
+            }
+            
+            double newpiv = abs(a[i][k])/maxfil;
+			
+            if (maxpiv < newpiv) {
+                maxpiv = newpiv;
+                filamaxpiv = i;
+            }
+        }
+        
+       
+        
+        // Comparación pivote con tolerancia
+        if (maxpiv < tol) {
+            cerr << "ERROR: La matriz es singular o casi singular." << endl;
+            return 0;
+        }
+        
+        // Cambio de filas
+        if (filamaxpiv != k) {
+			for (int j = 0; j < n; ++j) {
+				double temp = a[k][j];
+				a[k][j] = a[filamaxpiv][j];
+				a[filamaxpiv][j] = temp;
+			}
+			++numper;
+		}
+        
+        // Escritura en el vector permutación
+        int temp = perm[k];
+        perm[k] = perm[filamaxpiv];
+        perm[filamaxpiv] = temp;
+       
+        // Guardado de los multiplicadores
+        for (int i = k; i < n; ++i) a[i][k] = a[i][k]/a[k][k];
+        
+        // (Eliminación) Gauss(iana)
+        for (int i = k + 1; i < n; ++i) {
+            for (int j = k + 1; j < n; ++j) a[i][j] -= a[i][k]*a[k][j];
+        }   
+    }
+    
+    if (numper%2 == 0) return 1;
+    else return -1;
+}
+
+int main() {
+    
+    /* Lectura de datos */
+    
+    fileIn.open("ejemplo2.txt");
+    
+    int n, m, k;
+    fileIn >> n >> m;
+
+   
+    
+    
+    // Creación de matriz y vector
+    double **a;
+    a = (double **) calloc(n, sizeof(double *));
+    for (int i = 0; i < n; ++i) a[i] = (double *) calloc(n, sizeof(double));
+
+    double *b;
+    b = (double *) calloc(n, sizeof(double));
+    
+    int *perm;
+    perm = (int *) calloc(n, sizeof(int));
+    for (int i = 0; i < n; ++i) perm[i] = i;
+    
+    for (int h = 0; h < m; ++h) {
+        int i, j;
+        fileIn >> i >> j;
+        fileIn >> a[i][j];
+    }
+    
+    fileIn >> k;
+    
+    for (int h = 0; h < k; ++h) {
+        int i;
+        fileIn >> i >> b[i];
+    }
+    
+    fileIn.close();
+    
+
+    
+    int z = lu(a, n, perm, 0.000000000001);
+    cout << z << endl;
+    
+    for (int h = 0; h < n; ++h) {
+        for (int g = 0; g < n; ++g) cout << a[h][g] << " ";
+        cout << endl;
+    }
+    
+}
